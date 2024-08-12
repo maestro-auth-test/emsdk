@@ -16,6 +16,10 @@
     -->
     <FileExtensionSignInfo Update=".py" CertificateName="None" />
     <FileExtensionSignInfo Update=".js" CertificateName="None" />
+
+    <FileSignInfo Include="Activate.ps1" CertificateName="None" />
+    <FileSignInfo Include="run_python.ps1" CertificateName="None" />
+    <FileSignInfo Include="run_python_compiler.ps1" CertificateName="None" />
   </ItemGroup>
   
   <ItemGroup>
