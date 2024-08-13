@@ -15,9 +15,15 @@
       These files can't be dual-signed with 3PartySHA2, don't try to sign them.
     -->
     <FileExtensionSignInfo Update=".py" CertificateName="3PartyScriptsSHA2" />
-    <FileExtensionSignInfo Update=".js" CertificateName="None" />
+    <FileExtensionSignInfo Update=".js" CertificateName="3PartyScriptsSHA2" />
     <FileExtensionSignInfo Update=".ps1" CertificateName="3PartyScriptsSHA2" />
 
+    <!--
+      These files are not supported by ESRP, don't try to sign them.
+    -->
+    <FileSignInfo Include="__init__.py" CertificateName="None" /> <!-- *some* of them are zero length -->
+
+    <!---->
   </ItemGroup>
   
   <ItemGroup>
