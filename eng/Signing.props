@@ -10,14 +10,13 @@
     <FileExtensionSignInfo Include=".msi" CertificateName="MicrosoftDotNet500" />
     <FileExtensionSignInfo Include=".pyd" CertificateName="3PartySHA2" />
     <FileExtensionSignInfo Include=".cat" CertificateName="MicrosoftDotNet500" />
-    <FileExtensionSignInfo Include=".ps1" CertificateName="3PartyScriptsSHA2" />
 
     <!--
       These files can't be dual-signed with 3PartySHA2, don't try to sign them.
     -->
     <FileExtensionSignInfo Update=".py" CertificateName="3PartyScriptsSHA2" />
     <FileExtensionSignInfo Update=".js" CertificateName="None" />
-    <FileExtensionSignInfo Include=".ps1" CertificateName="3PartyScriptsSHA2" />
+    <FileExtensionSignInfo Update=".ps1" CertificateName="3PartyScriptsSHA2" />
 
   </ItemGroup>
   
