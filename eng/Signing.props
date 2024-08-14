@@ -22,20 +22,7 @@
       Zero length files should not be signed because it breaks signing/ESRP.
     -->
     <FileSignInfo Include="__init__.py" CertificateName="None" />
-    <!-- resolve/test has a lot of zero length files -->
-    <!--
-    <FileSignInfo Include="index.js" CertificateName="None" />
-    <FileSignInfo Include="corejs2-built-ins.js" CertificateName="None" />
-    <FileSignInfo Include="Final_Punctuation.js" CertificateName="None" />
-    <FileSignInfo Include="main.js" CertificateName="None" />
-    <FileSignInfo Include="mug.js" CertificateName="None" />
-    <FileSignInfo Include="doom.js" CertificateName="None" />
-    <FileSignInfo Include="a.js" CertificateName="None" />
-    <FileSignInfo Include="b.js" CertificateName="None" />
-    <FileSignInfo Include="root.js" CertificateName="None" />
-    <FileSignInfo Include="other-lib.js" CertificateName="None" />
-    <FileSignInfo Include="foo.js" CertificateName="None" />
-    -->
+    <FileSignInfo Include="eggs.py" CertificateName="None" />
   </ItemGroup>
   
   <ItemGroup>
