@@ -48,6 +48,6 @@ os.environ["PATH"] = os.path.join(node_paths[0], "bin") + os.pathsep + os.enviro
 for path in node_paths:
     prune(os.path.join(path, "lib"))
 
-rewrite_package_json(os.path.join(emscripten_path, "package.json")
+rewrite_package_json(os.path.join(emscripten_path, "package.json"))
 auditfix(emscripten_path)
 prune(emscripten_path)
