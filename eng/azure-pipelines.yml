@@ -294,6 +294,7 @@ extends:
           ############ Workloads BUILD ############
           - job: Build_Workloads
             displayName: Workloads
+            condition: False
             dependsOn:
             - Build_win_x64
             - Build_win_arm64
