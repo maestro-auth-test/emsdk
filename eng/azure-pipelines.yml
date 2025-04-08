@@ -8,8 +8,9 @@ trigger:
 pr: none
 
 variables:
-- template: /eng/common-variables.yml@self
 - template: /eng/common/templates-official/variables/pool-providers.yml@self
+- name: _BuildConfig
+  value: Release
 - name: LinuxImage
   value: build.ubuntu.2204.amd64
 - name: WindowsImage
@@ -20,6 +21,22 @@ variables:
   value: >-
     $nupkgs_large=(Get-ChildItem artifacts/packages/$(_BuildConfig)/Shipping -recurse -include "*.nupkg" | Select-Object Name,Length | Where-Object { $_.Length -gt 250*1MB });
     if ($nupkgs_large.Length -gt 0) { Write-Error "NuGet size exceeds 250MiB: $($nupkgs_large | Format-Table | Out-String)"; exit 1 }
+
+- ${{ if notin(variables['Build.Reason'], 'PullRequest') }}:
+  - name: _TeamName
+    value: DotNetCore
+  - name: _SignType
+    value: real
+  # Publish-Build-Assets provides: MaestroAccessToken, BotAccount-dotnet-maestro-bot-PAT
+  # DotNet-HelixApi-Access provides: HelixApiAccessToken
+  - group: Publish-Build-Assets
+  - group: DotNet-HelixApi-Access
+  - group: SDL_Settings
+  - name: _InternalBuildArgs
+    value: /p:DotNetSignType=$(_SignType) 
+      /p:TeamName=$(_TeamName)
+      /p:DotNetPublishUsingPipelines=true
+      /p:OfficialBuildId=$(BUILD.BUILDNUMBER)
 
 resources:
   repositories:
@@ -66,7 +83,7 @@ extends:
               os: macOS
             steps:
             - bash: |
-                ./build.sh --arch x64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=osx-x64 /p:AssetManifestOS=osx /p:PlatformName=x64 $(_InternalBuildArgs) $(_NonWindowsInternalPublishArg)
+                ./build.sh --arch x64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=osx-x64 /p:AssetManifestOS=osx /p:PlatformName=x64 $(_InternalBuildArgs)
               displayName: Build
             - task: 1ES.PublishPipelineArtifact@1
               inputs:
@@ -87,7 +104,7 @@ extends:
               os: macOS
             steps:
             - bash: |
-                ./build.sh --arch arm64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=osx-arm64 /p:AssetManifestOS=osx /p:PlatformName=arm64 $(_InternalBuildArgs) $(_NonWindowsInternalPublishArg)
+                ./build.sh --arch arm64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=osx-arm64 /p:AssetManifestOS=osx /p:PlatformName=arm64 $(_InternalBuildArgs)
               displayName: Build
             - task: 1ES.PublishPipelineArtifact@1
               inputs:
@@ -109,7 +126,7 @@ extends:
               os: linux
             steps:
             - bash: |
-                ./build.sh --arch x64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-x64 /p:AssetManifestOS=linux /p:PlatformName=x64 $(_InternalBuildArgs) $(_NonWindowsInternalPublishArg)
+                ./build.sh --arch x64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-x64 /p:AssetManifestOS=linux /p:PlatformName=x64 $(_InternalBuildArgs)
               displayName: Build
             - task: 1ES.PublishPipelineArtifact@1
               inputs:
@@ -130,7 +147,7 @@ extends:
               os: linux
             steps:
             - bash: |
-                ./build.sh --arch arm64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-arm64 /p:AssetManifestOS=linux /p:PlatformName=arm64 $(_InternalBuildArgs) $(_NonWindowsInternalPublishArg)
+                ./build.sh --arch arm64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-arm64 /p:AssetManifestOS=linux /p:PlatformName=arm64 $(_InternalBuildArgs)
               displayName: Build
             - task: 1ES.PublishPipelineArtifact@1
               inputs:
@@ -151,7 +168,7 @@ extends:
               os: linux
             steps:
             - bash: |
-                ./build.sh --arch x64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-musl-x64 /p:AssetManifestOS=linux-musl /p:PlatformName=x64 $(_InternalBuildArgs) $(_NonWindowsInternalPublishArg)
+                ./build.sh --arch x64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-musl-x64 /p:AssetManifestOS=linux-musl /p:PlatformName=x64 $(_InternalBuildArgs)
               displayName: Build
             - task: 1ES.PublishPipelineArtifact@1
               inputs:
@@ -172,7 +189,7 @@ extends:
               os: linux
             steps:
             - bash: |
-                ./build.sh --arch arm64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-musl-arm64 /p:AssetManifestOS=linux-musl /p:PlatformName=arm64 $(_InternalBuildArgs) $(_NonWindowsInternalPublishArg)
+                ./build.sh --arch arm64 --restore --build --pack --sign --publish --ci --configuration $(_BuildConfig) /p:PackageRID=linux-musl-arm64 /p:AssetManifestOS=linux-musl /p:PlatformName=arm64 $(_InternalBuildArgs)
               displayName: Build
             - task: 1ES.PublishPipelineArtifact@1
               inputs:
