@@ -17,6 +17,7 @@
    <!-- remove the manifest packages, they are built in the SDK repo now -->
    <ItemGroup>
      <Artifact Remove="$(ArtifactsShippingPackagesDir)*.Manifest-*.nupkg" />
+     <Artifact Remove="$(ArtifactsNonShippingPackagesDir)*.Manifest-*.nupkg" />
    </ItemGroup>
 
   <!--
