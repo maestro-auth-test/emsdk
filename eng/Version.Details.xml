@@ -215,7 +215,7 @@
       <Uri>https://github.com/dotnet/llvm-project</Uri>
       <Sha>0eac01ff3c4a8d1dbe6452dd2d8b75395bbf2b3d</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="1.0.0-882e836a">
+    <Dependency Name="Microsoft.DotNet.Arcade.Sdk" Version="1.0.0-2c08a85d">
       <Uri>https://github.com/maestro-auth-test/dotnet-arcade</Uri>
       <Sha>4246a31e5de9de87f760218c4f588cebf4661f45</Sha>
       <SourceBuild RepoName="arcade" ManagedOnly="true" />
