@@ -248,15 +248,7 @@
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>d13c858f5792ca573c322dcaf2cf7ea814fa5f31</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Installers" Version="10.0.0-beta.25366.103">
-      <Uri>https://github.com/dotnet/dotnet</Uri>
-      <Sha>d13c858f5792ca573c322dcaf2cf7ea814fa5f31</Sha>
-    </Dependency>
     <Dependency Name="Microsoft.DotNet.Build.Tasks.Templating" Version="10.0.0-beta.25366.103">
-      <Uri>https://github.com/dotnet/dotnet</Uri>
-      <Sha>d13c858f5792ca573c322dcaf2cf7ea814fa5f31</Sha>
-    </Dependency>
-    <Dependency Name="Microsoft.DotNet.Build.Tasks.Workloads" Version="10.0.0-beta.25366.103">
       <Uri>https://github.com/dotnet/dotnet</Uri>
       <Sha>d13c858f5792ca573c322dcaf2cf7ea814fa5f31</Sha>
     </Dependency>
